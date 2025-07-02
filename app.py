@@ -1,4 +1,3 @@
-app_code = '''
 import streamlit as st
 from summarizer import run_rag_pipeline
 
@@ -12,12 +11,8 @@ if pdf_file and query and st.button("Generate Summary"):
     with st.spinner("Processing..."):
         try:
             result = run_rag_pipeline(pdf_file, query)
-            st.success("Done!")
+            st.success(" Done!")
             st.markdown("### Answer:")
             st.write(result)
         except Exception as e:
-            st.error(f"Something went wrong: {e}")
-'''
-
-with open("app.py", "w") as f:
-    f.write(app_code)
+            st.error(f" Something went wrong:\n\n{e}")
