@@ -1,10 +1,5 @@
-reqs = '''
-streamlit
-pymupdf
-faiss-cpu
-sentence-transformers
-openai
-'''
-
-with open("requirements.txt", "w") as f:
-    f.write(reqs)
+streamlit==1.35.0
+pymupdf==1.23.19
+faiss-cpu==1.7.4
+sentence-transformers==2.2.2
+openai==1.30.1
