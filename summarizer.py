@@ -2,10 +2,11 @@ import fitz  # PyMuPDF
 import faiss
 import numpy as np
 from sentence_transformers import SentenceTransformer
-import openai
+from openai import OpenAI
 import os
 
-openai.api_key = os.getenv("OPENAI_API_KEY")
+client = OpenAI()  # Automatically uses OPENAI_API_KEY from env
+
 embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
 
 def extract_text_from_pdf(pdf_file):
@@ -34,7 +35,7 @@ def retrieve_top_chunks(query, index, chunks, top_k=5):
 
 def summarize_with_openai(text):
     prompt = f"Summarize the following:\n\n{text}"
-    response = openai.ChatCompletion.create(
+    response = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[{"role": "user", "content": prompt}]
     )
