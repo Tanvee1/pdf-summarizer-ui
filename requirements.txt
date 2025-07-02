@@ -1,0 +1,10 @@
+reqs = '''
+streamlit
+pymupdf
+faiss-cpu
+sentence-transformers
+openai
+'''
+
+with open("requirements.txt", "w") as f:
+    f.write(reqs)
