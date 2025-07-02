@@ -4,8 +4,10 @@ import numpy as np
 from sentence_transformers import SentenceTransformer
 from openai import OpenAI
 import os
+import streamlit as st
 
-client = OpenAI()  # Automatically uses OPENAI_API_KEY from env
+# Use API key from Streamlit secrets
+client = OpenAI(api_key=st.secrets["openai"]["api_key"])
 
 embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
 
