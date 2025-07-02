@@ -1,4 +1,3 @@
-code = '''
 import fitz  # PyMuPDF
 import faiss
 import numpy as np
@@ -11,7 +10,7 @@ embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
 
 def extract_text_from_pdf(pdf_file):
     doc = fitz.open(stream=pdf_file.read(), filetype="pdf")
-    return "\\n".join([page.get_text() for page in doc])
+    return "\n".join([page.get_text() for page in doc])
 
 def chunk_text(text, chunk_size=500, overlap=50):
     chunks = []
@@ -34,7 +33,7 @@ def retrieve_top_chunks(query, index, chunks, top_k=5):
     return [chunks[i] for i in indices[0]]
 
 def summarize_with_openai(text):
-    prompt = f"Summarize the following:\\n\\n{text}"
+    prompt = f"Summarize the following:\n\n{text}"
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[{"role": "user", "content": prompt}]
@@ -48,7 +47,3 @@ def run_rag_pipeline(pdf_file, query):
     index = build_faiss_index(np.array(embeddings))
     top_chunks = retrieve_top_chunks(query, index, chunks)
     return summarize_with_openai(" ".join(top_chunks))
-'''
-
-with open("summarizer.py", "w") as f:
-    f.write(code)
